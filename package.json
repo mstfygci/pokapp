@@ -1,0 +1,8 @@
+{
+  "name": "pokapp",
+  "version": "0.1.0",
+  "description": "NextJS application to view all pokemon details",
+  "repository": "https://github.com/mstfygci/pokapp",
+  "author": "Mustafa Yagci <mustafa.1643@gmail.com>",
+  "license": "MIT"
+}
