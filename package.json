@@ -4,5 +4,15 @@
   "description": "NextJS application to view all pokemon details",
   "repository": "https://github.com/mstfygci/pokapp",
   "author": "Mustafa Yagci <mustafa.1643@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^14.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }

@@ -1,5 +1,9 @@
 ### Node
 /node_modules
 
+### Next
+/.next
+/out
+
 ### IDEA
 /.idea
