@@ -1,5 +1,26 @@
 {
   "extends": [
+    "airbnb-base",
     "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "next/core-web-vitals"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "import/extensions": "off",
+        "@typescript-eslint/consistent-type-imports": "error"
+      }
+    }
   ]
 }
