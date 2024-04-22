@@ -18,7 +18,8 @@
       "files": ["**/*.ts", "**/*.tsx"],
       "plugins": [
         "@typescript-eslint",
-        "tailwindcss"
+        "tailwindcss",
+        "simple-import-sort"
       ],
       "extends": [
         "plugin:tailwindcss/recommended",
@@ -39,6 +40,9 @@
           }
         ],
         "import/extensions": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "import/order": "off",
         "@typescript-eslint/consistent-type-imports": "error"
       }
     }
