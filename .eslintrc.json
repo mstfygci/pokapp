@@ -1,8 +1,18 @@
 {
   "extends": [
     "airbnb-base",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
   ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "endOfLine": "auto"
+      }
+    ]
+  },
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
@@ -12,12 +22,20 @@
       "extends": [
         "airbnb",
         "airbnb-typescript",
-        "next/core-web-vitals"
+        "next/core-web-vitals",
+        "plugin:prettier/recommended"
       ],
       "parserOptions": {
         "project": "./tsconfig.json"
       },
       "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "endOfLine": "auto"
+          }
+        ],
         "import/extensions": "off",
         "@typescript-eslint/consistent-type-imports": "error"
       }
