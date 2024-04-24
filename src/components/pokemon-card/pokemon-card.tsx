@@ -1,6 +1,9 @@
 import './pokemon-card.css';
 
+import Image from 'next/image';
 import { type ReactElement } from 'react';
+
+import pokeImage from '../../assets/poke-ball.jpg';
 
 interface Type {
   name: string;
@@ -35,12 +38,14 @@ export default function PokemonCard({
           ))}
         </figcaption>
         <div className="relative w-1/2">
-          <img
-            className="pokeBall"
-            src="/assets/poke-ball.jpg"
-            alt="Pokeball"
+          <Image className="pokeBall" src={pokeImage} alt="Pokeball" />
+          <Image
+            className="pokemonImg"
+            src={sprite}
+            alt={name}
+            width={475}
+            height={475}
           />
-          <img className="pokemonImg" src={sprite} alt={name} />
         </div>
       </figure>
     </section>
