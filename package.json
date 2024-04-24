@@ -13,7 +13,8 @@
     "check-types": "tsc --noEmit --pretty",
     "lint": "next lint",
     "commit": "cz",
-    "build": "next build"
+    "build": "next build",
+    "build-stats": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
     "next": "^14.2.2",
@@ -30,6 +31,7 @@
     "@typescript-eslint/parser": "^7.7.0",
     "autoprefixer": "^10.4.19",
     "commitizen": "^4.3.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
