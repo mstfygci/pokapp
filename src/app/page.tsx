@@ -15,7 +15,7 @@ export default async function Home({
 }: {
   searchParams?: { page?: string };
 }) {
-  const pageLimit = Number(process.env.NEXT_PAGE_LIMIT) ?? 10;
+  const pageLimit = Number(process.env.NEXT_PAGE_LIMIT ?? 10);
   const currentPage = Number(searchParams?.page) || 1;
   const { count, pokemons } = await getPokemonList(currentPage, pageLimit);
   const pageCount = Math.ceil(count / pageLimit);
