@@ -3,24 +3,7 @@ import React from 'react';
 
 import Pagination from '../components/pagination/pagination';
 import PokemonCard from '../components/pokemon-card/pokemon-card';
-
-interface Pokemon {
-  name: string;
-  url: string;
-}
-
-interface PokemonDetail {
-  id: number;
-  name: string;
-  url: string;
-  sprite: string;
-  types: string[];
-}
-
-interface IndexApiResponse {
-  count: number;
-  results: Pokemon[];
-}
+import { getPokemonList } from './api/pokemon';
 
 export const metadata = {
   title: 'Pokapp',
@@ -33,7 +16,7 @@ export default async function Home({
   searchParams?: { page?: string };
 }) {
   const currentPage = Number(searchParams?.page) || 1;
-  const { count, pokemons } = await getPokemons(currentPage, 10);
+  const { count, pokemons } = await getPokemonList(currentPage, 10);
   const pageCount = Math.ceil(count / 10);
 
   return (

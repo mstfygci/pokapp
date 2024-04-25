@@ -4,9 +4,11 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import leftArrow from '../../assets/left-arrow.svg';
 import pokeImage from '../../assets/poke-ball.jpg';
 import PokemonType from '../../components/pokemon-type/pokemon-type';
 import ProgressBar from '../../components/progress/progressBar';
+import { getPokemonDetail } from '../api/pokemon';
 
 export async function generateMetadata({
   params,
@@ -19,45 +21,38 @@ export async function generateMetadata({
   };
 }
 
+export default async function Page({ params }: { params: { slug: string } }) {
+  const pokemon = await getPokemonDetail(
+    `https://pokeapi.co/api/v2/pokemon/${params.slug}`,
+  );
+
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-[#87c75e] px-5 text-white">
+    <div
+      className={`flex h-screen flex-col overflow-hidden px-5 text-white ${pokemon.types[0]}`}
+    >
       <div className="py-5">
         <Link className="backBg" href="/">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            aria-hidden="true"
-            className="size-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-            />
-          </svg>
+          <Image className="size-4" src={leftArrow} alt="Left Arrow" />
         </Link>
       </div>
       <div className="mt-4 flex grow">
         <div className="h-full w-1/3 ">
           <h1 className="text-center text-3xl font-extrabold capitalize">
-            {params.slug}
+            {pokemon.name}
           </h1>
           <div className="mt-2 flex justify-center gap-2">
-            {types.map((type) => (
-              <PokemonType name={type.name} key={type.name} />
+            {pokemon.types.map((name) => (
+              <PokemonType name={name} key={name} />
             ))}
           </div>
           <div className="m-4 mx-auto flex w-2/4 items-center justify-center rounded-xl border border-gray-100 bg-amber-400 px-6 py-4 shadow-2xl">
             <div className="w-1/2 text-center">
               <h2 className="pb-0.5 font-medium text-red-600">Height</h2>
-              <p>2&apos; 04&quot;</p>
+              <p>{pokemon.height} cm</p>
             </div>
             <div className="w-1/2 border-l text-center">
               <h2 className="pb-0.5 font-medium text-red-600">Weight</h2>
-              <p>15.2 lbs</p>
+              <p>{pokemon.weight} g</p>
             </div>
           </div>
         </div>
@@ -65,8 +60,8 @@ export async function generateMetadata({
           <div className="absolute z-10">
             <Image
               className="z-auto block max-w-none"
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-              alt={params.slug}
+              src={pokemon.sprite}
+              alt={pokemon.name}
               width={475}
               height={475}
             />
