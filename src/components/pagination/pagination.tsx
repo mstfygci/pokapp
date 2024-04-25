@@ -30,6 +30,12 @@ export default function Pagination({
     router.push(`${pathname}?${params.toString()}`);
   };
 
+  const goToPage = (page: number) => {
+    const params = new URLSearchParams({});
+    params.set('page', `${page}`);
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <>
       <button
@@ -42,11 +48,35 @@ export default function Pagination({
         Previous
       </button>
       <div className="flex items-center gap-2">
-        {page - 2 > 0 && <Button page={page - 2} isActive={false} />}
-        {page - 1 > 0 && <Button page={page - 1} isActive={false} />}
+        {page - 2 > 0 && (
+          <Button
+            onClick={() => goToPage(page - 2)}
+            page={page - 2}
+            isActive={false}
+          />
+        )}
+        {page - 1 > 0 && (
+          <Button
+            onClick={() => goToPage(page - 1)}
+            page={page - 1}
+            isActive={false}
+          />
+        )}
         <Button page={page} isActive />
-        {page < pageCount && <Button page={page + 1} isActive={false} />}
-        {page + 1 < pageCount && <Button page={page + 2} isActive={false} />}
+        {page < pageCount && (
+          <Button
+            onClick={() => goToPage(page + 1)}
+            page={page + 1}
+            isActive={false}
+          />
+        )}
+        {page + 1 < pageCount && (
+          <Button
+            onClick={() => goToPage(page + 2)}
+            page={page + 2}
+            isActive={false}
+          />
+        )}
       </div>
       <button
         disabled={page === pageCount}
