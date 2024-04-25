@@ -13,11 +13,6 @@
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
-.grass {
-    background: #87c75e;
-}
-
-
 .pokemonCard h3 {
     opacity: 0.55;
     position: absolute;
