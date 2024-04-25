@@ -30,9 +30,9 @@ export default function Pagination({
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const goToPage = (page: number) => {
+  const goToPage = (newPage: number) => {
     const params = new URLSearchParams({});
-    params.set('page', `${page}`);
+    params.set('page', `${newPage}`);
     router.push(`${pathname}?${params.toString()}`);
   };
 
