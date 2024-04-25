@@ -56,7 +56,7 @@
     );
 }
 
-.pokeBall {
+.backBall {
     position: absolute;
     display: flex;
     z-index: -1;
@@ -67,7 +67,7 @@
     bottom: 0;
 }
 
-.pokeBall.rotar {
+.backBall.rotar {
     animation-name: girar;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;

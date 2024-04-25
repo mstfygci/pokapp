@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               width={475}
               height={475}
             />
-            <Image className="pokeBall rotar" src={pokeImage} alt="Pokeball" />
+            <Image className="backBall rotar" src={pokeImage} alt="Pokeball" />
           </div>
         </div>
         <div className="h-full w-1/3">
