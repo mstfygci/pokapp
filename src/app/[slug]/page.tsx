@@ -1,5 +1,6 @@
 import './page.css';
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,8 +8,16 @@ import pokeImage from '../../assets/poke-ball.jpg';
 import PokemonType from '../../components/pokemon-type/pokemon-type';
 import ProgressBar from '../../components/progress/progressBar';
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const types = [{ name: 'Grass' }, { name: 'Poison' }];
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const pokemon = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
+  return {
+    title: `${pokemon} - Pokapp`,
+  };
+}
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-[#87c75e] px-5 text-white">

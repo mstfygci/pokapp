@@ -22,69 +22,10 @@ interface IndexApiResponse {
   results: Pokemon[];
 }
 
-interface DetailApiResponse {
-  id: number;
-  name: string;
-  sprites: {
-    other: {
-      'official-artwork': {
-        front_default: string;
-      };
-    };
-  };
-  types: [
-    {
-      type: {
-        name: string;
-      };
-    },
-  ];
-}
-
-async function getPokemonDetail(url: string): Promise<PokemonDetail> {
-  const detailResp = await fetch(url);
-
-  if (!detailResp.ok) {
-    throw new Error(`PokeApi error for ${url}`);
-  }
-
-  return detailResp.json().then((resp: DetailApiResponse) => {
-    return {
-      id: resp.id,
-      name: resp.name,
-      url,
-      sprite: resp.sprites.other['official-artwork'].front_default,
-      types: resp.types.map((type) => type.type.name),
-    } satisfies PokemonDetail;
-  });
-}
-
-async function getPokemons(
-  page: number,
-  take: number,
-): Promise<{ count: number; pokemons: PokemonDetail[] }> {
-  const offset = (page - 1) * take;
-  const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${take}&offset=${offset}`,
-  );
-
-  if (!res.ok) {
-    throw new Error('PokeApi error!');
-  }
-
-  const pokemons = await res.json().then((response: IndexApiResponse) => {
-    return { results: response.results, count: response.count };
-  });
-
-  const pokemonDetailPromises = pokemons.results.map(async (pokemon) =>
-    getPokemonDetail(pokemon.url),
-  );
-
-  return {
-    count: pokemons.count,
-    pokemons: await Promise.all(pokemonDetailPromises),
-  };
-}
+export const metadata = {
+  title: 'Pokapp',
+  description: 'Pokapp created by Mustafa Yagci',
+};
 
 export default async function Home({
   searchParams,
