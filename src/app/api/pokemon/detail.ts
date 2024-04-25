@@ -1,3 +1,5 @@
+import pokeApi from './api';
+
 interface DetailApiResponse {
   id: number;
   name: string;
@@ -44,31 +46,29 @@ export interface PokemonDetail {
 export default async function getPokemonDetail(
   url: string,
 ): Promise<PokemonDetail> {
-  const detailResp = await fetch(url);
+  const responsive = await pokeApi
+    .get<DetailApiResponse>(url)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw new Error(error);
+    });
 
-  if (!detailResp.ok) {
-    throw new Error(`PokeApi error for ${url}`);
-  }
-
-  return detailResp.json().then(
-    (resp: DetailApiResponse) =>
-      ({
-        id: resp.id,
-        name: resp.name,
-        url,
-        sprite: resp.sprites.other['official-artwork'].front_default,
-        types: resp.types.map((type) => type.type.name),
-        height: resp.height,
-        weight: resp.weight,
-        stats: {
-          hp: resp.stats.find((stat) => stat.stat.name === 'hp')?.base_stat,
-          attack: resp.stats.find((stat) => stat.stat.name === 'attack')
-            ?.base_stat,
-          defense: resp.stats.find((stat) => stat.stat.name === 'defense')
-            ?.base_stat,
-          speed: resp.stats.find((stat) => stat.stat.name === 'speed')
-            ?.base_stat,
-        },
-      }) satisfies PokemonDetail,
-  );
+  return {
+    id: responsive.id,
+    name: responsive.name,
+    url,
+    sprite: responsive.sprites.other['official-artwork'].front_default,
+    types: responsive.types.map((type) => type.type.name),
+    height: responsive.height,
+    weight: responsive.weight,
+    stats: {
+      hp: responsive.stats.find((stat) => stat.stat.name === 'hp')?.base_stat,
+      attack: responsive.stats.find((stat) => stat.stat.name === 'attack')
+        ?.base_stat,
+      defense: responsive.stats.find((stat) => stat.stat.name === 'defense')
+        ?.base_stat,
+      speed: responsive.stats.find((stat) => stat.stat.name === 'speed')
+        ?.base_stat,
+    },
+  } satisfies PokemonDetail;
 }
