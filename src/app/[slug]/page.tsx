@@ -7,7 +7,7 @@ import Link from 'next/link';
 import leftArrow from '../../assets/left-arrow.svg';
 import pokeImage from '../../assets/poke-ball.jpg';
 import PokemonType from '../../components/pokemon-type/pokemon-type';
-import ProgressBar from '../../components/progress/progressBar';
+import ProgressBar from '../../components/progress-bar/progress-bar';
 import { getPokemonDetail } from '../api/pokemon';
 
 export async function generateMetadata({
@@ -70,12 +70,27 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="h-full w-1/3">
           <h1 className="text-center text-xl font-bold">Base Stats</h1>
-          <ProgressBar name="Base Happiness" percent={13} variation="success" />
-          <h1 className="mt-8 text-center text-xl font-bold">Training</h1>
-          <ProgressBar name="Base Happiness" percent={63} variation="danger" />
-          <ProgressBar name="Base Happiness" percent={23} variation="warning" />
-          <ProgressBar name="Base Happiness" percent={48} variation="info" />
-          <ProgressBar name="Base Happiness" percent={13} variation="success" />
+          <ProgressBar
+            name="Hp"
+            value={pokemon.stats.hp ?? 0}
+            variation="danger"
+          />
+          <ProgressBar
+            name="Attack"
+            value={pokemon.stats.attack ?? 0}
+            variation="success"
+          />
+          <ProgressBar
+            name="Defense"
+            value={pokemon.stats.defense ?? 0}
+            variation="warning"
+          />
+          <ProgressBar
+            name="Speed"
+            value={pokemon.stats.speed ?? 0}
+            variation="info"
+            max={200}
+          />
         </div>
       </div>
     </div>

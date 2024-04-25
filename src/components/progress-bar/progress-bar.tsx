@@ -1,4 +1,4 @@
-import './progressBar.css';
+import './progress-bar.css';
 
 import type { ReactElement } from 'react';
 
@@ -6,13 +6,17 @@ type Variations = 'danger' | 'warning' | 'info' | 'success';
 
 export default function ProgressBar({
   name,
-  percent,
+  value,
+  max = 100,
   variation,
 }: {
   name: string;
-  percent: number;
+  value: number;
+  max?: number;
   variation: Variations;
 }): ReactElement {
+  const percentage = Math.round((value / max) * 100);
+
   let colorClass: string = '';
   switch (variation) {
     case 'danger':
@@ -34,10 +38,10 @@ export default function ProgressBar({
         <div className="relative flex h-3 items-center justify-center">
           <div
             className={`absolute inset-y-0 left-0 rounded-lg ${colorClass}`}
-            style={{ width: `${percent}%` }}
+            style={{ width: `${percentage}%` }}
           />
           <div className="relative text-sm font-medium text-green-900">
-            {percent} %
+            {value} / {max}
           </div>
         </div>
       </div>
