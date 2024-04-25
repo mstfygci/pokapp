@@ -22,7 +22,7 @@ export default function PokemonCard({
       <h2 className="text-sm font-bold capitalize tracking-tighter text-white md:text-lg">
         {name}
       </h2>
-      <h3>#{String(`${id}`).padStart(3, '0')}</h3>
+      <h3 className="tracking-tighter">#{String(`${id}`).padStart(3, '0')}</h3>
       <figure className="flex items-center justify-center">
         <figcaption className="flex w-1/2  flex-col items-center justify-center">
           {types.map((type) => (
