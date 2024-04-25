@@ -1,3 +1,7 @@
+### Project
+/.env*
+!.env.example
+
 ### Node
 /node_modules
 

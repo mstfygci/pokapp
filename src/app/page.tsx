@@ -15,9 +15,10 @@ export default async function Home({
 }: {
   searchParams?: { page?: string };
 }) {
+  const pageLimit = Number(process.env.NEXT_PAGE_LIMIT) ?? 10;
   const currentPage = Number(searchParams?.page) || 1;
-  const { count, pokemons } = await getPokemonList(currentPage, 10);
-  const pageCount = Math.ceil(count / 10);
+  const { count, pokemons } = await getPokemonList(currentPage, pageLimit);
+  const pageCount = Math.ceil(count / pageLimit);
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
